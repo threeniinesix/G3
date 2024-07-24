@@ -2,7 +2,7 @@ import openai
 import requests
 
 # Constants
-DATA_URL = 'https://raw.githubusercontent.com/threeniinesix/G3/main/train.txt'
+DATA_URL = 'https://github.com/threeniinesix/G3/main/train.txt'
 DATA_PATH = 'train.txt'
 
 # Download the dataset
@@ -26,7 +26,7 @@ def prepare_prompt(history):
     return prompt
 
 # Set up OpenAI API key
-openai.api_key = 'your-api-key'
+openai.api_key = 'secrets.OPENAI_API_KEY'
 
 # Function to get prediction from GPT-4
 def get_prediction(prompt):
