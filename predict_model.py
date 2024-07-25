@@ -31,14 +31,15 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 
 # Function to get prediction from GPT-4
 def get_prediction(prompt):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",  # Use the appropriate model for GPT-4
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ]
+    response = openai.Completion.create(
+        model="text-davinci-003",  # Use the appropriate model
+        prompt=prompt,
+        max_tokens=10,
+        n=1,
+        stop=None,
+        temperature=0.7
     )
-    prediction = response['choices'][0]['message']['content'].strip()
+    prediction = response.choices[0].text.strip()
     return prediction
 
 # Simulate predictions using the dataset
