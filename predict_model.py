@@ -1,5 +1,6 @@
 import openai
 import requests
+import os
 
 # Constants
 DATA_URL = 'https://github.com/threeniinesix/G3/main/train.txt'
@@ -25,13 +26,13 @@ def prepare_prompt(history):
     prompt = "Given the following history of numbers, predict the next number: " + ", ".join(history)
     return prompt
 
-# Set up OpenAI API key
-openai.api_key = 'secrets.OPENAI_API_KEY'
+# Set up OpenAI API key from environment variable
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 # Function to get prediction from GPT-4
 def get_prediction(prompt):
     response = openai.Completion.create(
-        engine="davinci-codex",  # Use the appropriate engine for GPT-4
+        engine="text-davinci-003",  # Use the appropriate engine for GPT-4
         prompt=prompt,
         max_tokens=10
     )
