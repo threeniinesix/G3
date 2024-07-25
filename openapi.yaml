@@ -1,0 +1,60 @@
+openapi: "3.1.0"
+info:
+  version: 1.0.0
+  title: Number Prediction API
+  description: An API to predict numbers based on historical data
+  license:
+    name: MIT
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /predict:
+    post:
+      summary: Predict the next number
+      operationId: predictNumber
+      tags:
+        - prediction
+      requestBody:
+        description: Historical data for prediction
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - history
+              properties:
+                history:
+                  type: array
+                  items:
+                    type: integer
+                  description: An array of historical numbers
+      responses:
+        '200':
+          description: The predicted number
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prediction:
+                    type: integer
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
